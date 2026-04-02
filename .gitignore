@@ -112,3 +112,5 @@ keys/
 
 # metadata
 _emscripten_sdk/
+build/
+External/

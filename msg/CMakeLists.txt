@@ -281,6 +281,7 @@ set(msg_files
 	versioned/VehicleStatus.msg
 	versioned/VtolVehicleStatus.msg
 	versioned/Wind.msg
+	Custom_march.msg # added in March 25th.
 )
 list(SORT msg_files)
 

@@ -284,6 +284,10 @@ MavlinkReceiver::handle_message(mavlink_message_t *msg)
 	case MAVLINK_MSG_ID_OPEN_DRONE_ID_SYSTEM:
 		handle_message_open_drone_id_system(msg);
 		break;
+	// self-defined
+	case MAVLINK_MSG_ID_CUSTOM_MARCH:
+		handle_message_custom_march(msg);
+		break;
 
 #if !defined(CONSTRAINED_FLASH)
 
@@ -3213,6 +3217,21 @@ void MavlinkReceiver::handle_message_open_drone_id_system(
 	odid_system.operator_altitude_geo = odid_module.operator_altitude_geo;
 
 	_open_drone_id_system_pub.publish(odid_system);
+}
+// self defined
+void MavlinkReceiver::handle_message_custom_march(
+	mavlink_message_t *msg)
+{
+	mavlink_custom_march_t mav_custom_march;
+	mavlink_msg_custom_march_decode(msg, &mav_custom_march);
+
+	custom_march_s custom_march_data{};
+
+	custom_march_data.timestamp	= hrt_absolute_time();
+	custom_march_data.custom_value	= mav_custom_march.custom_value;
+	custom_march_data.value		= mav_custom_march.value;
+
+	_custom_march_pub.publish(custom_march_data); //uORB::Publication
 }
 void
 MavlinkReceiver::run()

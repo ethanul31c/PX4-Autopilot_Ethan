@@ -160,7 +160,11 @@
 # include "streams/SCALED_PRESSURE3.hpp"
 # include "streams/UAVIONIX_ADSB_OUT_CFG.hpp"
 # include "streams/UAVIONIX_ADSB_OUT_DYNAMIC.hpp"
+
 #endif // !CONSTRAINED_FLASH
+
+/* Self-defined mavlink hpp"*/
+# include "streams/CUSTOM_MARCH.hpp"
 
 // ensure PX4 rotation enum and MAV_SENSOR_ROTATION align
 static_assert(MAV_SENSOR_ROTATION_NONE == static_cast<MAV_SENSOR_ORIENTATION>(ROTATION_NONE),
@@ -527,6 +531,11 @@ static const StreamListItem streams_list[] = {
 #if defined(GLOBAL_POSITION_SENSOR_HPP)
 	create_stream_list_item<MavlinkStreamGlobalPositionSensor>(),
 #endif // GLOBAL_POSITION_SENSOR_HPP
+
+/* Self-defined mavlink stream objects*/
+#if defined(CUSTOM_MARCH_HPP)
+	create_stream_list_item<MavlinkStreamCustomMarch>(),
+#endif // CUSTOM_MARCH_HPP
 };
 
 const char *get_stream_name(const uint16_t msg_id)
