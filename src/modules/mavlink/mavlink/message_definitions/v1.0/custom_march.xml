@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<mavlink>
+  <version>3</version>
+  <messages>
+    <message id="1351" name="CUSTOM_MARCH">
+      <description>custom message field types</description>
+
+      <field type="uint64_t" name="timestamp">uint64_t</field>
+      <field type="uint8_t" name="value">uint8_t</field>
+      <field type="float" name="custom_value">float</field>
+    </message>
+  </messages>
+</mavlink>
